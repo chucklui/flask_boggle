@@ -25,8 +25,8 @@ def new_game():
     game_id = str(uuid4())
     game = BoggleGame()
     games[game_id] = game
-    board = game.get_random_board()
-
+    # breakpoints()
+    board = game.board
     return_object = {game_id, board}
 
     return jsonify(return_object)
