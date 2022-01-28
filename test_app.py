@@ -23,8 +23,13 @@ class BoggleAppTestCase(TestCase):
 
         with self.client as client:
             response = client.get('/')
-            ...
-            # test that you're getting a template
+            html = response.get_data(as_text=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('<form id="newWordForm">', html)
+            self.assertIn('<table class="board">', html)
+
+            # For later use when we want to check the session data
+            # self.assertEqual(session[STRING],VALUE)
 
     def test_api_new_game(self):
         """Test starting a new game."""

@@ -30,10 +30,16 @@ class WordList:
     def check_word(self, word):
         """Is word in word list?
 
-            >>> w1 = WordList("test_dictionary.txt")
+        We make an instance of the WordList Class
+            >>> w1 = WordList("dictionary.txt")
+
+        We start testing our cases
+
             >>> w1.check_word('XYZ')
             False
             >>> w1.check_word('AAH')
+            True
+            >>> w1.check_word('APPLE')
             True
         """
             # >>> w2 = WordList("test_dictionary.txt")
