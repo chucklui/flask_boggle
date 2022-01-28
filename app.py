@@ -25,9 +25,14 @@ def new_game():
     game_id = str(uuid4())
     game = BoggleGame()
     games[game_id] = game
-    # breakpoints()
     board = game.board
-    return_object = {game_id, board}
 
-    return jsonify(return_object)
-    # return {"gameId": "need-real-id", "board": "need-real-board"}
+    return jsonify(game_id=game_id, board=board)
+
+@app.post("/api/new-game")
+def score_word():
+    """ """
+
+    games[game_id] # How do we get the game id? we need this as a key to get the value
+    games[game_id].is_word_in_word_list(word)
+    games[game_id].check_word_on_board(word)

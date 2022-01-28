@@ -38,10 +38,12 @@ class BoggleAppTestCase(TestCase):
 
         with self.client as client:
             response = client.post('/api/new-game')
+            breakpoint()
             data = json.loads(response.get_data(as_text=True))
             # breakpoint()
             self.assertTrue(data['game_id'])
             self.assertTrue(data['board'])
+            self.assertTrue(games)
 
             # json_data = request.get_json()
             # game_id = json_data['game_id']
