@@ -38,15 +38,16 @@ class BoggleAppTestCase(TestCase):
 
         with self.client as client:
             response = client.post('/api/new-game')
-            breakpoint()
             data = json.loads(response.get_data(as_text=True))
-            # breakpoint()
             self.assertTrue(data['game_id'])
             self.assertTrue(data['board'])
             self.assertTrue(games)
 
-            # json_data = request.get_json()
-            # game_id = json_data['game_id']
-            # board = json_data['board']
+    def test_api_score_word(self):
+        """ Test trying to score a word (valid only) """
+        with self.client as client:
+            response = client.post('/api/score-word')
+
             
-            # write a test for this route
+
+            data = json.loads(response.get_data(as_text=True))
