@@ -29,10 +29,20 @@ def new_game():
 
     return jsonify(game_id=game_id, board=board)
 
-@app.post("/api/new-game")
+@app.post("/api/new-word")
 def score_word():
     """ """
+    data = request.json()
+    game_id = data['gameId']
+    word = data['word']
 
-    games[game_id] # How do we get the game id? we need this as a key to get the value
-    games[game_id].is_word_in_word_list(word)
-    games[game_id].check_word_on_board(word)
+    is_word_value = games[game_id].is_word_in_word_list(word)
+    check_word_value = games[game_id].check_word_on_board(word)
+
+    if not is_word_value:
+        return jsonify({"result": "not-word"})
+    if not check_word_value:
+        return jsonify({"result": "not-on-board"})
+    if is_word_value and check_word_value:
+        return jsonify({"result": "ok"})
+
