@@ -31,11 +31,11 @@ def new_game():
 
 @app.post("/api/score-word")
 def score_word():
-    """ """
+    """ We take a word and check its validity for scoring. """
 
     # breakpoint()
     game_id = request.json["gameId"]
-    word = request.json["word"]
+    word = request.json["word"].upper()
 
     is_word_value = games[game_id].is_word_in_word_list(word)
     check_word_value = games[game_id].check_word_on_board(word)

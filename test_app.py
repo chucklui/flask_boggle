@@ -46,8 +46,12 @@ class BoggleAppTestCase(TestCase):
     def test_api_score_word(self):
         """ Test trying to score a word (valid only) """
         with self.client as client:
+
+            game_id = client.post("/api/new-game").get_json()['gameId']
+            game = games[game_id]
+
             response = client.post('/api/score-word')
 
-            
+
 
             data = json.loads(response.get_data(as_text=True))
