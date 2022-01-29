@@ -26,8 +26,8 @@ function displayBoard(board) {
   // loop over board and create the DOM tr/td structure
 }
 
-async function scoreWord(gameId, word){
-  
+async function scoreWord(){
+  let word = $wordInput.val();
   const response = await axios({
     url: "/api/score-word",
     method: "POST",
