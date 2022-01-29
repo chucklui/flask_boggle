@@ -38,20 +38,29 @@ class BoggleAppTestCase(TestCase):
 
         with self.client as client:
             response = client.post('/api/new-game')
-            data = json.loads(response.get_data(as_text=True))
-            self.assertTrue(data['game_id'])
-            self.assertTrue(data['board'])
+       
+            data = response.get_json()
+            game_id = data['game_id']
+            board = data['board']
+  
+            self.assertTrue(game_id)
+            self.assertTrue(board)
             self.assertTrue(games)
 
     def test_api_score_word(self):
         """ Test trying to score a word (valid only) """
         with self.client as client:
 
-            game_id = client.post("/api/new-game").get_json()['gameId']
+            game_id = client.post("/api/new-game").get_json()['game_id']
             game = games[game_id]
 
-            response = client.post('/api/score-word')
+            game.board[0] = ["C", "A", "X", "X", "X"]
+            game.board[1] = ["X", "T", "X", "X", "X"]
+            game.board[2] = ["D", "O", "G", "X", "X"]
+            game.board[3] = ["X", "X", "X", "X", "X"]
+            game.board[4] = ["X", "X", "X", "X", "X"]
 
-
-
-            data = json.loads(response.get_data(as_text=True))
+            response = self.client.post(
+                "/api/score-word",
+                json={"word": "CAT", "gameId": game_id})
+            self.assertEqual(response.get_json(), {'result': 'ok'})
